@@ -1,0 +1,37 @@
+version: 2
+
+sources:
+
+  - name: google_sheets # name of the source 
+    schema: google_sheets # this is the schema our raw data lives in
+    database: ALUMNO20_DEV_BRONZE_DB # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 1000, period: day}
+      error_after: {count: 1000, period: day}
+
+    tables:
+
+      - name: budget
+        loaded_at_field: _fivetran_synced
+        columns:
+          - name: _row
+            tests:
+              - not_null
+              - unique
+          - name: product_id
+            tests:
+              - relationships:
+                  to: source('sql_server_db','products')
+                  field: product_id
+          - name: quantity
+            tests:
+              - positive_values
+          - name: quantity
+          - name: month
+          - name: _fivetran_synced
