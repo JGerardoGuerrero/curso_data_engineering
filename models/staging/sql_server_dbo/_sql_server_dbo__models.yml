@@ -1,0 +1,124 @@
+
+models:
+  - name: stg_sql_server_dbo__addresses
+    description: ""
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: ""
+
+      - name: zipcode
+        data_type: varchar
+        description: ""
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: address
+        data_type: varchar
+        description: ""
+
+      - name: state
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__promos
+    description: "Contiene información de promociones y su estado."
+    columns:
+          - name: promo_id
+            description: "Identificador único de la promoción."
+
+          - name: discount
+            description: "Porcentaje o valor del descuento aplicado."
+
+          - name: status
+            description: "Estado actual de la promoción (activo/inactivo)."
+
+          - name: _fivetran_deleted
+            description: "Indica si el registro fue eliminado (soft delete)."
+
+          - name: _fivetran_synced
+            description: "Marca de tiempo de la última sincronización vía Fivetran."
+
+  - name: stg_sql_server_dbo__events
+    description: "Registros de eventos de usuarios, incluyendo información de direcciones."
+    columns:
+          - name: address_id
+            description: "Identificador único de la dirección."
+          - name: zipcode
+            description: "Código postal asociado a la dirección."
+          - name: country
+            description: "País de la dirección."
+          - name: address
+            description: "Dirección completa."
+          - name: state
+            description: "Estado o región de la dirección."
+          - name: _fivetran_deleted
+            description: "Indica si el registro fue eliminado (soft delete)."
+          - name: _fivetran_synced
+            description: "Marca de tiempo de la última sincronización vía Fivetran."
+
+  - name: stg_sql_server_dbo__orders
+    description: "Pedidos realizados por los usuarios, junto con sus detalles logísticos y económicos."
+    columns:
+          - name: order_id
+            description: "Identificador único del pedido."
+          - name: shipping_service
+            description: "Nombre del servicio de envío utilizado."
+          - name: shipping_cost
+            description: "Costo del envío."
+          - name: address_id
+            description: "Identificador de la dirección de entrega."
+          - name: created_at
+            description: "Fecha de creación del pedido."
+          - name: promo_id
+            description: "Identificador de la promoción aplicada, si existe."
+          - name: estimated_delivery_at
+            description: "Fecha estimada de entrega."
+          - name: order_cost
+            description: "Costo base del pedido (sin envío ni descuento)."
+          - name: user_id
+            description: "Identificador del usuario que realizó el pedido."
+          - name: order_total
+            description: "Total pagado (costo + envío - descuento)."
+          - name: delivered_at
+            description: "Fecha real de entrega del pedido."
+          - name: tracking_id
+            description: "Código de seguimiento del envío."
+          - name: status
+            description: "Estado del pedido (ej. entregado, en tránsito, cancelado)."
+          - name: _fivetran_deleted
+            description: "Indica si el registro fue eliminado (soft delete)."
+          - name: _fivetran_synced
+            description: "Marca de tiempo de la última sincronización vía Fivetran."
+
+  - name: stg_sql_server_dbo__order_items
+    description: "Relación entre pedidos y productos, incluyendo cantidad por producto."
+    columns:
+          - name: order_id
+            description: "Identificador del pedido al que pertenece el ítem."
+          - name: product_id
+            description: "Identificador del producto."
+          - name: quantity
+            description: "Cantidad de unidades del producto en el pedido."
+          - name: _fivetran_deleted
+            description: "Indica si el registro fue eliminado (soft delete)."
+          - name: _fivetran_synced
+            description: "Marca de tiempo de la última sincronización vía Fivetran."
+
+  - name: stg_sql_server_dbo__products
+    description: "Catálogo de productos disponibles, incluyendo inventario y precios."
+    columns:
+          - name: product_id
+            description: "Identificador único del producto."
+          - name: price
+            description: "Precio unitario del producto."
+          - name: name
+            description: "Nombre del producto."
+          - name: inventory
+            description: "Cantidad disponible en inventario."
+          - name: _fivetran_deleted
+            description: "Indica si el registro fue eliminado (soft delete)."
+          - name: _fivetran_synced
+            description: "Marca de tiempo de la última sincronización vía Fivetran."

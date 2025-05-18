@@ -1,9 +1,9 @@
-models:
+  models:
   - name: stg_google_sheets__budget
     description: ""
     columns:
-      - name: budget_id
-        data_type: varchar
+      - name: _row
+        data_type: number
         description: ""
 
       - name: product_id
@@ -14,7 +14,7 @@ models:
         data_type: number
         description: ""
 
-      - name: monthly_date
+      - name: month
         data_type: date
         description: ""
 
